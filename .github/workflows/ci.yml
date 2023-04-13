@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  push:
+  
+  workflow_dispatch:
+  
+jobs:
+  build:
+    runs-on:unbuntu-latest
+    
+  steps:
+    -uses:actions/checkout@latest
+    -uses:microsoft/powerplatform-actions/pack-solution@v0
+    with:
+        solution-file: packed-solutions/testmigration.zip
+        solution-filder: solutions/testmigration/src
+        solution-type: Both
+    -uses: actions/upload-artifact@latest
+    with:
+      name:packed-solutions
+      path:packed-solutions
+    
